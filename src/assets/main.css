@@ -1,5 +1,7 @@
 @import "./base.css";
-
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
 #app {
   padding: 2rem;
   font-weight: normal;
@@ -11,6 +13,17 @@ a,
   color: hsla(160, 100%, 37%, 1);
   transition: 0.4s;
   padding: 3px;
+}
+
+.button {
+    background-color: hsla(160, 100%, 37%, 1);
+    color: #fff;
+    transition: .2s ease-in-out;
+}
+.button:hover {
+  background-color: #fff;
+  color: hsla(160, 100%, 37%, 1);
+
 }
 
 @media (hover: hover) {

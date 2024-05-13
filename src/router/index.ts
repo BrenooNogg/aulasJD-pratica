@@ -1,6 +1,7 @@
 import { createRouter, createWebHistory } from "vue-router";
 import Pokedex from "@/pages/pokedex/Pokedex.vue";
 import PokemonPage from "@/pages/pokedex/PokemonPage.vue";
+import ToDoList from "@/pages/ToDoList.vue";
 
 const routes = [
     {
@@ -12,6 +13,11 @@ const routes = [
         path: "/pokemon/:id/",
         name: "PokemonPage",
         component: PokemonPage,
+    },
+    {
+        path: '/todolist',
+        name: "ToDoList",
+        component: ToDoList
     }
 ]
 
