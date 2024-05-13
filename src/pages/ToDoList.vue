@@ -28,7 +28,7 @@
         :task="item.nome"
         :done="item.done"
         :description="item.description"
-        @update="updateTask(index, item)"
+        @update="doneTask(index, item)"
         @delete="deleteTask(index)"
       >
       </ToDoItem>
@@ -69,10 +69,6 @@
     },
   ]);
 
-  const updateTask = (index: number, event: {done: boolean}) => {
-      array.value[index].done = event.done;
-  }
-
   const isButtonClicked = ref(false);
 
   const addTask = () => {
@@ -89,6 +85,10 @@
     newTask.value = '';
     isButtonClicked.value = false; 
   };
+  
+  const doneTask = (index: number, event: {done: boolean}) => {
+      array.value[index].done = event.done;
+  }
 
   const deleteTask = (index: number) => {
     array.value.splice(index, 1);

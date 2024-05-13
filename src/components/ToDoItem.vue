@@ -2,12 +2,12 @@
   <div class="todo-item mt-4">
     <div class="flex flex-row items-center mt-2">      
       <div class="div text-center">
-        <label :class="{'active': done}">{{ task }}</label>
-        <p :class="{'active': done}">{{ description }}</p>
+        <InputText type="text" :class="{'disabled': isButtonClicked, 'done': done}" v-model="task" :disabled="isButtonClicked" />
+        <InputText type="text" :class="{'disabled': isButtonClicked, 'done': done}" v-model="description" :disabled="isButtonClicked" />
       </div>
       <div class="flex gap-4">
-        <input type="checkbox" v-model="done" @change="updateTask" />
-        <!-- <button @click="deleteTask" class="button border p-2 rounded">Editar</button> -->
+        <input type="checkbox" v-model="done" @change="doneTask" />
+        <button @click="updateTask" class="button border p-2 rounded">{{ isButtonClicked ? 'Editar' : 'Concluir' }}</button>
         <button @click="deleteTask" class="button border p-2 rounded">Excluir</button>
       </div>
     </div>
@@ -15,6 +15,7 @@
 </template>
 <script setup lang="ts">
 import { ref } from 'vue';
+import InputText from 'primevue/inputtext';
 
 const props = defineProps<{
   task: string;
@@ -22,19 +23,29 @@ const props = defineProps<{
   description?: string;
 }>();
 
-const emit = defineEmits(["update", "delete"]);
+const emit = defineEmits(["done", "update", "delete"]);
 const done = ref(props.done);
+const task = ref(props.task);
+const description = ref(props.description);
+const isButtonClicked = ref(true); 
 
-const updateTask = () => {
-  emit('update', {
-    task: props.task,
+const doneTask = () => {
+  emit('done', {
+    task: task,
     done: done,
-    description: props.description
+    description: description
   });
 };
 
+const updateTask = () => {
+  isButtonClicked.value = !isButtonClicked.value; 
+  if (isButtonClicked.value) {
+    emit('update'); 
+  }
+}
+
 const deleteTask = () => {
-  emit('delete'); // Emitir evento 'delete' sem passar nenhum argumento
+  emit('delete');
 };
 
 </script>
@@ -42,9 +53,20 @@ const deleteTask = () => {
 .todo-item {
   margin-bottom: 1rem;
 }
-.active {
+.disabled {
+  border: none;
+  background-color: transparent;
+  box-shadow: none;
+}
+.disabled:nth-child(2){
+  width: 200px;
+}
+.done {
+  color: red;
   text-decoration: line-through;
 }
+
+
 .div{
   width: 100%;
 }
