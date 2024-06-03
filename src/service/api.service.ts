@@ -9,4 +9,11 @@ const api = axios.create({
     },
 })
 
-export default api;
+const gitURL = "https://api.github.com/users/";
+const gitHubApi = axios.create({
+    baseURL: gitURL,
+    headers: {
+        "Content-Type": "application/json",
+    }
+})
+export default {api, gitHubApi};
