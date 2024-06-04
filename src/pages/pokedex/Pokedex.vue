@@ -33,7 +33,7 @@ pokemonData.value = response;
 }
 
 const getPokemons = async () => {
-const response = await getAllPokemon(9, 0); 
+const response = await getAllPokemon(20, 0); 
 pokemonsList.value = response.results;
 }
 
