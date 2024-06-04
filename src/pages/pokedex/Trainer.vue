@@ -29,11 +29,22 @@
 
 </template>
 
-<script setup>
+<script setup lang="ts">
 import { getUser, getUserRepos } from '@/service/github.service';
 import { onMounted, ref } from 'vue';
 import { usePartyStore } from '@/store/PartyStore';
-const user = ref(null);
+
+interface User {
+    name: string;
+    login: string;
+    avatar_url: string;
+    bio: string;
+    company: string;
+    location: string;
+    followers: number;
+    following: number;
+}
+const user = ref<User | null>(null);
 const pokemon = usePartyStore();;
 const get = async () => {
     const response = await getUser('BrenooNogg');
@@ -42,7 +53,7 @@ const get = async () => {
 }
 const project = ref(null)   
 const repo = async () => {
-    const response = await getUserRepos(user.name);
+    const response = await getUserRepos(user.value?.name || '');
     console.log(response)
 }
 onMounted(() => {

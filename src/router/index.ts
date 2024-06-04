@@ -5,6 +5,7 @@ import Party from "@/pages/pokedex/Party.vue";
 import ToDoList from "@/pages/ToDoList.vue";
 import Trainer from "@/pages/pokedex/Trainer.vue";
 
+
 const routes = [
     {
         path: "/",
@@ -22,8 +23,8 @@ const routes = [
         component: Party
     },
     {
-        path: "/trainer", 
-        name: 'Trainer',
+        path: '/trainer',
+        name: "Trainer",
         component: Trainer
     },
     {
